@@ -32,8 +32,6 @@ namespace MyBlueSample.ViewModels
             if (args is IDevice device)
             {
                 Device = device;
-                if (device.State == Plugin.BLE.Abstractions.DeviceState.Disconnected)
-                    await ConnectToDevice(device);
                 await LoadServices(device);
             }
         }
@@ -41,8 +39,15 @@ namespace MyBlueSample.ViewModels
         async Task LoadServices(IDevice device)
         {
             IsLoading = true;
-            var services = await _bluetoothService.GetServices(device, TokenSource.Token);
-            Services = new ObservableCollection<IService>(services);
+            if (device.State == Plugin.BLE.Abstractions.DeviceState.Disconnected)
+            {
+                await ConnectToDevice(device);
+            }
+            if (device.State == Plugin.BLE.Abstractions.DeviceState.Connected)
+            {
+                var services = await _bluetoothService.GetServices(device, TokenSource.Token);
+                Services = new ObservableCollection<IService>(services);
+            }
             IsLoading = false;
         }
 
