@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<base:BasePage
+    x:Class="MyBlueSample.Views.DevicePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:MyBlueSample.Views"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xct:SafeAreaEffect.SafeArea="True">
+    <base:BasePage.Content>
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsLoading}">
+            <CollectionView x:Name="serviceCollection" ItemsSource="{Binding Services}">
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Label Text="{Binding Device.Id}" />
+                        <Label Text="{Binding Device.Name}" />
+                        <Label Text="{Binding Device.State}" />
+                        <Label Text="{Binding Device.NativeDevice}" />
+                    </StackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" Orientation="Horizontal">
+                            <Label Text="{Binding Id}" />
+                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding IsPrimary, StringFormat='isPrimary: {0}'}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToServiceCommand, Source={Reference serviceCollection}}" CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="Loading...">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsLoading}"
+                                TargetType="Label"
+                                Value="False">
+                                <Setter Property="Text" Value="Empty..." />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+    </base:BasePage.Content>
+</base:BasePage>

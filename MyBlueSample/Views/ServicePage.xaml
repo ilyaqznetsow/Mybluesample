@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:BasePage
+    x:Class="MyBlueSample.Views.ServicePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:MyBlueSample.Views">
+    <ContentPage.Content>
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsLoading}">
+            <CollectionView x:Name="serviceCollection" ItemsSource="{Binding Characteristics}">
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Label Text="{Binding Service.Id}" />
+                        <Label Text="{Binding Service.Name}" />
+                    </StackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Padding="10"
+                            Orientation="Vertical"
+                            Spacing="10">
+                            <Label Text="{Binding Uuid}" />
+                            <Label Text="{Binding Value}" />
+                            <Label Text="{Binding StringValue}" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToCharacteristicCommand, Source={Reference serviceCollection}}" CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="Loading...">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsLoading}"
+                                TargetType="Label"
+                                Value="False">
+                                <Setter Property="Text" Value="Empty..." />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
+</views:BasePage>

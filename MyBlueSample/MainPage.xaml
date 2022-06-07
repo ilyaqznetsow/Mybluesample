@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePage
+    x:Class="MyBlueSample.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:MyBlueSample.Views"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xct:SafeAreaEffect.SafeArea="True"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="20,80">
+        <Label Text="bluetooth devices proof of concept" />
+        <Label Text="{Binding BluetoothState, StringFormat='State: {0}'}" />
+        <CollectionView
+            x:Name="devicesCollection"
+            ItemsSource="{Binding DevicesCollection}"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.Footer>
+                <ActivityIndicator
+                    IsRunning="{Binding IsScanning}"
+                    IsVisible="{Binding IsScanning}"
+                    Color="White" />
+            </CollectionView.Footer>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+                        <Label
+                            LineBreakMode="TailTruncation"
+                            Text="{Binding Id}"
+                            WidthRequest="40" />
+                        <Label HorizontalOptions="StartAndExpand" Text="{Binding NativeDevice.Name}" />
+                        <Label HorizontalOptions="End" Text="{Binding State}" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.GoToDeviceCommand, Source={Reference devicesCollection}}" CommandParameter="{Binding .}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button
+            Command="{Binding PerformScanCommand}"
+            HorizontalOptions="Center"
+            Text="Scan"
+            VerticalOptions="End">
+            <Button.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsScanning}"
+                    TargetType="Button"
+                    Value="True">
+                    <Setter Property="Text" Value="Stop" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+    </StackLayout>
+
+</base:BasePage>
+
