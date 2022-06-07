@@ -8,6 +8,7 @@ namespace MyBlueSample.Views
     {
         public BasePage()
         {
+            BackgroundColor = Color.Black;
         }
 
         protected override void OnDisappearing()
