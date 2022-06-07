@@ -29,6 +29,7 @@ namespace MyBlueSample.ViewModels
 
         public override async void OnAppearing(object args)
         {
+            base.OnAppearing(args);
             if (args is IDevice device)
             {
                 Device = device;
@@ -39,7 +40,7 @@ namespace MyBlueSample.ViewModels
         async Task LoadServices(IDevice device)
         {
             IsLoading = true;
-            if (device.State == Plugin.BLE.Abstractions.DeviceState.Disconnected)
+            if (device.State != Plugin.BLE.Abstractions.DeviceState.Connected)
             {
                 await ConnectToDevice(device);
             }

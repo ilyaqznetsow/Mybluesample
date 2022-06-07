@@ -48,10 +48,6 @@ namespace MyBlueSample.ViewModels
                 await _navigationService.NavigateTo<DevicePageViewModel, IDevice>(device);
             });
         }
-
-        public override void OnAppearing(object args)
-        {
-        }
     }
 }
 

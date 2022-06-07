@@ -11,7 +11,7 @@ namespace MyBlueSample.ViewModels
         public bool IsLoading { get; protected set; }
         public ICommand RefreshCommand { get; protected set; }
 
-        public abstract void OnAppearing(object args);
+        public virtual void OnAppearing(object args) { TokenSource = new CancellationTokenSource(); }
 
         public void OnDisappearing()
         {

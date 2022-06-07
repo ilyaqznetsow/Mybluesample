@@ -37,6 +37,7 @@ namespace MyBlueSample.ViewModels
 
         public override async void OnAppearing(object args)
         {
+            base.OnAppearing(args);
             if (args is IService service)
             {
                 Service = service;

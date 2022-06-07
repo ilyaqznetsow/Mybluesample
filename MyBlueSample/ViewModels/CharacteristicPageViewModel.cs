@@ -30,6 +30,7 @@ namespace MyBlueSample.ViewModels
 
         public override async void OnAppearing(object args)
         {
+            base.OnAppearing(args);
             if (args is ICharacteristic characteristic)
             {
                 Characteristic = characteristic;
