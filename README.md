@@ -1,1 +1,1 @@
-# Mybluesample
+# Sample project using Plugin.Ble. 
