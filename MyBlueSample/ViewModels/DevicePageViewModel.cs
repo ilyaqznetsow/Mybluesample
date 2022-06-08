@@ -47,7 +47,8 @@ namespace MyBlueSample.ViewModels
             if (device.State == Plugin.BLE.Abstractions.DeviceState.Connected)
             {
                 var services = await _bluetoothService.GetServices(device, TokenSource.Token);
-                Services = new ObservableCollection<IService>(services);
+                if (services != null)
+                    Services = new ObservableCollection<IService>(services);
             }
             IsLoading = false;
         }

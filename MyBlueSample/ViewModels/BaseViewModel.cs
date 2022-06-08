@@ -5,7 +5,7 @@ using PropertyChanged;
 namespace MyBlueSample.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public abstract class BaseViewModel
+    public class BaseViewModel
     {
         protected CancellationTokenSource TokenSource { get; private set; } = new CancellationTokenSource();
         public bool IsLoading { get; protected set; }

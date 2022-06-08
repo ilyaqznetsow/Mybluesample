@@ -24,7 +24,8 @@ namespace MyBlueSample.ViewModels
         {
             IsLoading = true;
             var descriptors = await _bluetoothService.GetDescriptors(characteristic, TokenSource.Token);
-            Descriptors = new ObservableCollection<IDescriptor>(descriptors);
+            if (descriptors != null)
+                Descriptors = new ObservableCollection<IDescriptor>(descriptors);
             IsLoading = false;
         }
 

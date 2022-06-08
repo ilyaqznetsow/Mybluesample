@@ -31,7 +31,8 @@ namespace MyBlueSample.ViewModels
         {
             IsLoading = true;
             var characteristics = await _bluetoothService.GetCharacteristics(service);
-            Characteristics = new ObservableCollection<ICharacteristic>(characteristics);
+            if (characteristics != null)
+                Characteristics = new ObservableCollection<ICharacteristic>(characteristics);
             IsLoading = false;
         }
 

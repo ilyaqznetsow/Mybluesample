@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Padding="20,80">
-        <Label Text="bluetooth devices proof of concept" />
+        <Label Text="bluetooth devices sample app" />
         <Label Text="{Binding BluetoothState, StringFormat='State: {0}'}" />
         <CollectionView
             x:Name="devicesCollection"

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MyBlueSample.ViewModels;
+using MyBlueSample.Views;
 using Xamarin.Forms;
 
 namespace MyBlueSample.Services
@@ -13,15 +14,16 @@ namespace MyBlueSample.Services
         public void SetRoot()
         {
             var mainPage = GetPage<MainViewModel>();
-            App.Current.MainPage = new NavigationPage(mainPage);
+            Application.Current.MainPage = new NavigationPage(mainPage);
         }
 
         public async Task NavigateTo<TViewModel, TArgs>(TArgs args)
         {
             var page = GetPage<TViewModel>();
-            await App.Current.MainPage.Navigation.PushAsync(page);
-            if (page.BindingContext is BaseViewModel baseViewModel)
-                baseViewModel.OnAppearing(args);
+            if (page is BasePage basePage)
+                basePage.NavigationArgs = args;
+            await Application.Current.MainPage.Navigation.PushAsync(page);
+
         }
 
         private Page GetPage<TViewModel>()
