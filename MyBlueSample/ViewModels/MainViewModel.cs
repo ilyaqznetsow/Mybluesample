@@ -12,6 +12,7 @@ namespace MyBlueSample.ViewModels
         IBluetooth _bluetoothService;
         INavigationService _navigationService;
 
+        public ICommand GoToAnimationPageCommand { get; private set; }
         public ICommand PerformScanCommand { get; private set; }
         public ICommand GoToDeviceCommand { get; private set; }
         public bool IsScanning { get; private set; }
@@ -45,7 +46,12 @@ namespace MyBlueSample.ViewModels
                     var devices = await _bluetoothService.StopScan();
                     IsScanning = false;
                 }
-                await _navigationService.NavigateTo<DevicePageViewModel, IDevice>(device);
+                await _navigationService.NavigateTo<DevicePageViewModel>(device);
+            });
+
+            GoToAnimationPageCommand = new Command(async () =>
+            {
+                await _navigationService.NavigateTo<CustomAnimationPageViewModel>(null);
             });
         }
     }

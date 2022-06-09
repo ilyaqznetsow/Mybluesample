@@ -24,7 +24,7 @@ namespace MyBlueSample.ViewModels
             RefreshCommand = new Command(async () => await LoadServices(Device), () => !IsLoading);
 
             GoToServiceCommand = new Command<IService>(async service =>
-            await _navigationService.NavigateTo<ServicePageViewModel, IService>(service));
+            await _navigationService.NavigateTo<ServicePageViewModel>(service));
         }
 
         public override async void OnAppearing(object args)

@@ -18,6 +18,7 @@ namespace MyBlueSample
             Routing.RegisterRoute(typeof(DevicePageViewModel), typeof(DevicePage));
             Routing.RegisterRoute(typeof(CharacteristicPageViewModel), typeof(CharacteristicPage));
             Routing.RegisterRoute(typeof(ServicePageViewModel), typeof(ServicePage));
+            Routing.RegisterRoute(typeof(CustomAnimationPageViewModel), typeof(CustomAnimationPage));
 
             DependencyService.Resolve<INavigationService>().SetRoot();
         }

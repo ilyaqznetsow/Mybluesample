@@ -14,10 +14,10 @@ namespace MyBlueSample.Services
         public void SetRoot()
         {
             var mainPage = GetPage<MainViewModel>();
-            Application.Current.MainPage = new NavigationPage(mainPage);
+            Application.Current.MainPage = new NavigationPage(mainPage) { BarBackground = Color.Black, BarTextColor = Color.White };
         }
 
-        public async Task NavigateTo<TViewModel, TArgs>(TArgs args)
+        public async Task NavigateTo<TViewModel>(object args)
         {
             var page = GetPage<TViewModel>();
             if (page is BasePage basePage)

@@ -6,6 +6,6 @@ namespace MyBlueSample.Services
     public interface INavigationService
     {
         void SetRoot();
-        Task NavigateTo<TViewModel, TArgs>(TArgs args);
+        Task NavigateTo<TViewModel>(object args);
     }
 }

@@ -6,12 +6,17 @@
     xmlns:base="clr-namespace:MyBlueSample.Views"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xct:SafeAreaEffect.SafeArea="True"
-    NavigationPage.HasNavigationBar="False">
+    BackgroundColor="Black"
+    NavigationPage.HasNavigationBar="True">
     <ContentPage.Resources>
         <ResourceDictionary>
             <xct:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GoToAnimationPageCommand}" Text="Skia" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout Padding="20,80">
         <Label Text="bluetooth devices sample app" />
         <Label Text="{Binding BluetoothState, StringFormat='State: {0}'}" />

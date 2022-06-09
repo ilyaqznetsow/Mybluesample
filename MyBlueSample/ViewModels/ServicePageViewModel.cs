@@ -24,7 +24,7 @@ namespace MyBlueSample.ViewModels
 
             RefreshCommand = new Command(async () => await LoadCharacteristics(Service), () => !IsLoading);
             GoToCharacteristicCommand = new Command<ICharacteristic>(async characteristic =>
-            await _navigationService.NavigateTo<CharacteristicPageViewModel, ICharacteristic>(characteristic));
+            await _navigationService.NavigateTo<CharacteristicPageViewModel>(characteristic));
         }
 
         async Task LoadCharacteristics(IService service)
